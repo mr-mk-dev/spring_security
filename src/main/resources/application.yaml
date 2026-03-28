@@ -1,0 +1,18 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: spring_Security
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/spring_security
+    username: manish
+    password: Manish7200
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
