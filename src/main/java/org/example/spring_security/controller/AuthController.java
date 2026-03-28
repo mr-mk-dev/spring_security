@@ -5,10 +5,7 @@ import org.example.spring_security.Dto.LoginReqDto;
 import org.example.spring_security.Dto.LoginResDTO;
 import org.example.spring_security.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/auth")
@@ -21,4 +18,11 @@ public class AuthController {
         return ResponseEntity.ok( authService.login(loginReqDto));
     }
 
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody LoginReqDto signupDTO){
+        if(authService.signup(signupDTO) != null){
+            return ResponseEntity.ok("Sign Up Successful");
+        }
+        return ResponseEntity.badRequest().body("Failed Signup");
+    }
 }
