@@ -1,5 +1,6 @@
 package org.example.spring_security.config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.example.spring_security.entity.Users;
@@ -24,5 +25,14 @@ public class AppUtil {
               .expiration(new Date(System.currentTimeMillis() + 1000*60*10))
               .signWith(secretKey())
               .compact();
+  }
+
+  public String getUserNameFromToken(String token){
+      Claims claims = Jwts.parser()
+              .verifyWith(secretKey())
+              .build()
+              .parseSignedClaims(token)
+              .getPayload();
+      return claims.getSubject();
   }
 }
